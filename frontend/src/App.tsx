@@ -8,6 +8,7 @@ import {useAppSelector} from "./app/hooks";
 import {selectUser} from "./features/users/usersSlice";
 import NewPhoto from "./features/Photo/NewPhoto";
 import Photos from "./features/Photo/Photos";
+import PhotosOneUser from "./features/OnePhotoUser/PhotosOneUser";
 
 function App() {
     const user = useAppSelector(selectUser);
@@ -27,6 +28,7 @@ function App() {
                       </ProtectedRoute>
                   }
               />
+              <Route path="/photos/:id" element={<PhotosOneUser />} />
               <Route path="/register" element={<Register/>} />
               <Route path="/login" element={<Login/>} />
               <Route path="*" element={<Typography variant="h1">Not found</Typography>} />

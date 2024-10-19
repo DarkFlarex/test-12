@@ -33,7 +33,7 @@ const UserMenu: React.FC<Props> = ({ user }) => {
                 </Avatar>
             </Grid>
             <Grid item>
-                <Typography color="inherit">
+                <Typography component={NavLink} to={`/photos/${user._id}`} color="inherit">
                     Hello, {user.displayName ? user.displayName : user.email}!
                 </Typography>
             </Grid>
