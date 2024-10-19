@@ -8,7 +8,6 @@ import FileInput from "../../../UI/FileInput/FileInput";
 import {LoadingButton} from "@mui/lab";
 import SaveIcon from '@mui/icons-material/Save';
 
-
 interface Props {
     isLoading: boolean;
 }

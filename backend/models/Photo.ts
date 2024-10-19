@@ -1,7 +1,6 @@
 import mongoose, {Types} from "mongoose";
 import User from "./User";
 
-
 const Schema = mongoose.Schema;
 
 const PhotoSchema = new Schema({

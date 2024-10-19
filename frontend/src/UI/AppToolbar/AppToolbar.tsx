@@ -24,7 +24,7 @@ const AppToolbar = () => {
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item>
                 <Typography variant="h6" component="div">
-                  <StyledLink to="/">Cocktail builder</StyledLink>
+                  <StyledLink to="/">Photo Gallery</StyledLink>
                 </Typography>
               </Grid>
 
