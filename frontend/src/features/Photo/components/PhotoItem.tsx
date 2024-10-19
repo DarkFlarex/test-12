@@ -37,7 +37,7 @@ const PhotoItem:React.FC<Props> = ({user,title,image}) => {
                     <CardHeader title={title} />
                 <StyledLink to={`/photos/${user._id}`}>
                     <CardContent>
-                        <span>{user.displayName}</span>
+                        <span>By: {user.displayName}</span>
                     </CardContent>
                 </StyledLink>
             </Card>
