@@ -22,7 +22,6 @@ const Photos = () => {
         content = photos.map((photo) => (
             <PhotoItem
                 key={photo._id}
-                _id={photo._id}
                 user={photo.user}
                 title={photo.title}
                 image={photo.image}
