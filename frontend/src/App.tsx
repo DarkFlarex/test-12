@@ -7,6 +7,7 @@ import ProtectedRoute from "./UI/ProtectedRoute/ProtectedRoute";
 import {useAppSelector} from "./app/hooks";
 import {selectUser} from "./features/users/usersSlice";
 import NewPhoto from "./features/Photo/NewPhoto";
+import Photos from "./features/Photo/Photos";
 
 function App() {
     const user = useAppSelector(selectUser);
@@ -17,7 +18,8 @@ function App() {
           </header>
           <Container maxWidth="xl" component="main">
               <Routes>
-              <Route
+                  <Route path="/" element={<Photos />} />
+                  <Route
                   path="/photos/new"
                   element={
                       <ProtectedRoute isAllowed={!!user}>

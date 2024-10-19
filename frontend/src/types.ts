@@ -1,3 +1,12 @@
+export interface Photo {
+    _id: string;
+    user: {
+        displayName: string;
+    }
+    title: string;
+    image: string;
+}
+
 export interface PhotoMutation {
     title: string;
     image: string;
