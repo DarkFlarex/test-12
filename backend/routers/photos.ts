@@ -14,25 +14,12 @@ photosRouter.get('/', async (req: RequestWithUser, res, next) => {
             filter.user = req.query.user;
         }
 
-        const photos = await Photo.find().populate('user');
+        const photos = await Photo.find(filter).populate('user', 'displayName');
         return res.send(photos);
     } catch (error) {
         next(error);
     }
 });
-
-photosRouter.get('/:id', async (req: RequestWithUser, res, next) => {
-    try {
-        const photo = await Photo.findById(req.params.id);
-        if (!photo) {
-            return res.status(404).send({ error: 'Photo not found' });
-        }
-        return res.send(photo);
-    } catch (error) {
-        next(error);
-    }
-});
-
 
 photosRouter.post('/', auth, imagesUpload.single("image"), async (req: RequestWithUser, res, next) => {
     try {
