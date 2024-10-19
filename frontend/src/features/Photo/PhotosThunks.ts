@@ -10,6 +10,14 @@ export const fetchPhotos = createAsyncThunk (
         return photos;
 });
 
+export const fetchPhotosOneUser = createAsyncThunk<Photo[], string>(
+    'photos/fetchPhotosOne',
+    async (id) => {
+        const { data: photos } = await axiosApi.get<Photo[]>(`/photos?user=${id}`);
+        return photos;
+    }
+);
+
 export const createPhoto = createAsyncThunk<void, PhotoMutation, { rejectValue: GlobalError; state: RootState }>(
     'photos/create',
     async (photoMutation, { getState, rejectWithValue }) => {
