@@ -1,3 +1,8 @@
+export interface PhotoMutation {
+    title: string;
+    image: string;
+}
+
 export interface User {
     _id: string;
     email: string;
