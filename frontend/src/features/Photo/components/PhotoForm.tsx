@@ -19,9 +19,16 @@ const PhotoForm: React.FC<Props> = ({ isLoading }) => {
         title: '',
         image: '',
     });
+    const [showError, setShowError] = useState(false);
 
     const submitFormHandler = async (event: React.FormEvent) => {
         event.preventDefault();
+        event.preventDefault();
+
+        if (!photo.image) {
+            setShowError(true);
+            return;
+        }
         try {
             await dispatch(createPhoto(photo)).unwrap();
             navigate('/');
@@ -63,6 +70,7 @@ const PhotoForm: React.FC<Props> = ({ isLoading }) => {
                     label="Image"
                     name="image"
                     onChange={fileInputChangeHandler}
+                    errorText={showError && !photo.image ? 'Image is required' : ''}
                 />
             </Grid>
             <Grid item>
