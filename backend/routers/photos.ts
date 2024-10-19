@@ -41,17 +41,15 @@ photosRouter.post('/', auth, imagesUpload.single("image"), async (req: RequestWi
     }
 });
 
-photosRouter.delete('/:id', auth, async (req, res, next) => {
+photosRouter.delete('/:id', auth, async (req:RequestWithUser, res, next) => {
     try {
-        const user = (req as RequestWithUser).user;
-
         const photo = await Photo.findOne({_id: req.params.id});
 
         if (!photo) {
             return res.status(404).send({error: 'Not found'});
         }
 
-        if (photo.user.toString() === user?._id.toString() || user?.role === 'admin') {
+        if (photo.user.toString() === req.user?._id.toString() || req.user?.role === 'admin') {
             await photo.deleteOne({_id: req.params.id});
         } else {
             return res.status(403).send({error: 'Unauthorized'});

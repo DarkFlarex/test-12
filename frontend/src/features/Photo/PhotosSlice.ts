@@ -1,6 +1,6 @@
 import {GlobalError, Photo} from "../../types";
 import {createSlice} from "@reduxjs/toolkit";
-import {createPhoto, fetchPhotos, fetchPhotosOneUser} from "./PhotosThunks";
+import {createPhoto, deletePhoto, fetchPhotos, fetchPhotosOneUser} from "./PhotosThunks";
 
 export interface PhotosState {
     items: Photo[];
@@ -9,6 +9,7 @@ export interface PhotosState {
     isCreatingError: GlobalError | null;
     item: Photo[];
     oneFetching: boolean;
+    deleteLoading: string | false;
 }
 
 const initialState: PhotosState = {
@@ -18,6 +19,7 @@ const initialState: PhotosState = {
     isCreatingError: null,
     item: [],
     oneFetching: false,
+    deleteLoading:false,
 };
 
 export const photosSlice = createSlice({
@@ -59,6 +61,16 @@ export const photosSlice = createSlice({
                 state.isCreating = false;
                 state.isCreatingError = error || null;
             });
+        builder
+            .addCase(deletePhoto.pending, (state, { meta: { arg: itemId } }) => {
+                state.deleteLoading = itemId;
+            })
+            .addCase(deletePhoto.fulfilled, (state) => {
+                state.deleteLoading = false;
+            })
+            .addCase(deletePhoto.rejected, (state) => {
+                state.deleteLoading = false;
+            });
     },
     selectors:{
         selectPhotos:(state)=>state.items,
@@ -67,6 +79,7 @@ export const photosSlice = createSlice({
         selectPhotosOneUserFetching: (state) => state.oneFetching,
         selectPhotoCreate:(state) => state.isCreating,
         selectPhotoCreateError:(state) => state.isCreatingError,
+        selectDeletePhotoLoading: (state) => state.deleteLoading,
     },
 });
 
@@ -74,7 +87,6 @@ export const photosReducer = photosSlice.reducer;
 
 export const {
     selectPhotos,
-    selectPhotosFetching,
     selectPhotosOneUser,
     selectPhotosOneUserFetching,
     selectPhotoCreate,

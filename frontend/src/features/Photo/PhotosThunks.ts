@@ -47,3 +47,18 @@ export const createPhoto = createAsyncThunk<void, PhotoMutation, { rejectValue: 
         }
     }
 );
+
+export const deletePhoto = createAsyncThunk<Photo, string, { rejectValue: GlobalError; state: RootState }>(
+    'photos/fetchDelete',
+    async (id, { rejectWithValue }) => {
+        try {
+            const { data: photo } = await axiosApi.delete<Photo>(`/photos/${id}`);
+            return photo;
+        } catch (e) {
+            if (isAxiosError(e) && e.response) {
+                return rejectWithValue(e.response.data);
+            }
+            throw e;
+        }
+    }
+);
