@@ -28,7 +28,7 @@ function App() {
                       </ProtectedRoute>
                   }
               />
-              <Route path="/photos/:id" element={<PhotosOneUser />} />
+              <Route path="/photos/:id" element={<PhotosOneUser />}/>
               <Route path="/register" element={<Register/>} />
               <Route path="/login" element={<Login/>} />
               <Route path="*" element={<Typography variant="h1">Not found</Typography>} />

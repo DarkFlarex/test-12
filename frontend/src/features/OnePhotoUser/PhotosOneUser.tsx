@@ -45,7 +45,16 @@ const PhotosOneUser = () => {
                     </Typography>
                     {user && onePhotosUser.find(photo => photo.user._id === user._id) && (
                         <Grid item>
-                            <Button component={NavLink} to="/photos/new" color="inherit">
+                            <Button
+                                component={NavLink}
+                                to="/photos/new"
+                                sx={{
+                                    bgcolor: 'primary.main',
+                                    color: 'white',
+                                    '&:hover': {
+                                    bgcolor: 'primary.dark',
+                                },
+                            }}>
                                Add new photo
                             </Button>
                         </Grid>
