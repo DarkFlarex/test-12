@@ -1,8 +1,14 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {GlobalError, PhotoMutation} from "../../types";
+import {GlobalError, Photo, PhotoMutation} from "../../types";
 import {RootState} from "../../app/store";
 import axiosApi from "../../axiosApi";
 import {isAxiosError} from "axios";
+
+export const fetchPhotos = createAsyncThunk (
+    'photos/fetchAll', async ()=>{
+        const {data: photos} = await axiosApi.get<Photo[]>('/photos');
+        return photos;
+});
 
 export const createPhoto = createAsyncThunk<void, PhotoMutation, { rejectValue: GlobalError; state: RootState }>(
     'photos/create',

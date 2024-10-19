@@ -14,7 +14,7 @@ photosRouter.get('/', async (req: RequestWithUser, res, next) => {
             filter.user = req.query.user;
         }
 
-        const photos = await Photo.find();
+        const photos = await Photo.find().populate('user');
         return res.send(photos);
     } catch (error) {
         next(error);
