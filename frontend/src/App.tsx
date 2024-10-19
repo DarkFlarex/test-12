@@ -3,9 +3,13 @@ import {Container, Typography} from "@mui/material";
 import Register from "./features/users/Register";
 import Login from "./features/users/login";
 import {Route, Routes} from "react-router-dom";
+import ProtectedRoute from "./UI/ProtectedRoute/ProtectedRoute";
+import {useAppSelector} from "./app/hooks";
+import {selectUser} from "./features/users/usersSlice";
+import NewPhoto from "./features/Photo/NewPhoto";
 
 function App() {
-
+    const user = useAppSelector(selectUser);
   return (
       <>
           <header>
@@ -13,6 +17,14 @@ function App() {
           </header>
           <Container maxWidth="xl" component="main">
               <Routes>
+              <Route
+                  path="/photos/new"
+                  element={
+                      <ProtectedRoute isAllowed={!!user}>
+                          <NewPhoto />
+                      </ProtectedRoute>
+                  }
+              />
               <Route path="/register" element={<Register/>} />
               <Route path="/login" element={<Login/>} />
               <Route path="*" element={<Typography variant="h1">Not found</Typography>} />

@@ -3,7 +3,7 @@ import { Avatar, Button, Grid, Typography } from '@mui/material';
 import { User } from '../../types';
 import { logout } from '../../features/users/usersThunks';
 import { useAppDispatch } from '../../app/hooks';
-import {useNavigate} from 'react-router-dom';
+import {NavLink, useNavigate} from 'react-router-dom';
 import { API_URL } from '../../constants';
 
 interface Props {
@@ -36,6 +36,11 @@ const UserMenu: React.FC<Props> = ({ user }) => {
                 <Typography color="inherit">
                     Hello, {user.displayName ? user.displayName : user.email}!
                 </Typography>
+            </Grid>
+            <Grid item>
+                <Button component={NavLink} to="/photos/new" color="inherit">
+                   Add new photo
+                </Button>
             </Grid>
             <Grid item>
                 <Button onClick={handleLogout} color="inherit">
